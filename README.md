@@ -39,9 +39,10 @@ certutil -d sql:$HOME/.pki/nssdb -L | grep docker-local
 chmod 644 ./docker-local.crt
 chmod 644 ./docker-local.key
 chmod 644 ./docker-local.p12
+chmod 644 ./docker-local.pfx
 chmod 644 ./docker-local.keystore.jks
 chmod 644 ./docker-local.truststore.jks
 chmod 644 ./key_creds
 chmod 644 ./keystore_creds
-chmod 644 truststore_creds
+chmod 644 ./truststore_creds
 ```
