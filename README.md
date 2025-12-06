@@ -29,10 +29,13 @@ sudo apt update && sudo apt install -y libnss3-tools
 certutil -d sql:$HOME/.pki/nssdb -D -n "docker-local" 2>/dev/null || true  # Remove old if exists
 certutil -d sql:$HOME/.pki/nssdb -A -t "CP,CP," -n "docker-local" -i ./docker-local.crt
 
-# 7. Verify it was added:
+# 7. Convert to a pfx for use with .net and kestrel
+openssl pkcs12 -export -out docker-local.pfx -inkey docker-local.key -in docker-local.crt -passout pass:password
+
+# 8. Verify it was added:
 certutil -d sql:$HOME/.pki/nssdb -L | grep docker-local
 
-# 8. Make sure everything's readable by all users:
+# 9. Make sure everything's readable by all users:
 chmod 644 ./docker-local.crt
 chmod 644 ./docker-local.key
 chmod 644 ./docker-local.p12
